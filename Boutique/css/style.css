@@ -1,0 +1,59 @@
+/* Conteneur pour fixer la barre au scroll */
+.filter-wrapper {
+    position: sticky;
+    top: 10px;
+    z-index: 1050;
+    margin-bottom: 40px;
+    padding: 0 15px;
+}
+
+/* La barre style "Pilule" ultra-moderne */
+.filter-glass-nav {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 100px;
+    padding: 6px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Les boutons de filtre */
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 100px;
+    text-decoration: none !important;
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.filter-item i {
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+/* L'état ACTIF (Le truc pro) */
+.filter-item.active {
+    background: var(--annor-blue);
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(26, 42, 68, 0.25);
+}
+
+.filter-item.active i {
+    color: var(--annor-gold);
+    opacity: 1;
+}
+
+/* Effet au survol pour les non-actifs */
+.filter-item:not(.active):hover {
+    background: rgba(26, 42, 68, 0.05);
+    color: var(--annor-blue);
+    transform: translateY(-1px);
+}
