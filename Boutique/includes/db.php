@@ -2,7 +2,7 @@
 $host = "sql100.byetcluster.com"; 
 $dbname = "if0_41339234_boutique"; 
 $user = "if0_41339234"; 
-$pass = "TON_VRAI_MOT_DE_PASSE_ICI"; // Le mot de passe de ton compte InfinityFree
+$pass = "Rx7PtLIy1Uc8"; // Le mot de passe de ton compte InfinityFree
 
 // Connexion pour la boutique (PDO)
 try {
