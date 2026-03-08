@@ -1,4 +1,4 @@
-name: Deploy to InfinityFree
+name: Deploy Annor Boutique
 on:
   push:
     branches:
@@ -7,13 +7,19 @@ jobs:
   ftp-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Recupérer le code
+      - name: 🚚 Recuperation du code
         uses: actions/checkout@v3
 
-      - name: 📂 Synchroniser avec InfinityFree
+      - name: 📂 Synchronisation vers InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftpupload.net
           username: if0_41339234
           password: ${{ secrets.FTP_PASSWORD }}
+          # On envoie le contenu du dossier Boutique directement dans htdocs
+          local-dir: ./Boutique/
           server-dir: /htdocs/
+          # On ignore les fichiers inutiles pour le serveur
+          exclude: |
+            **/.git*
+            **/.github*
