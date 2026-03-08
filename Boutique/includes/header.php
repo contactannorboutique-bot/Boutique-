@@ -2,11 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Annor Boutique | Chapeaux & Bijoux</title>
-    <link rel="stylesheet" href="css/style.css">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
     <style>
         :root {
             --annor-blue: #1a2a44;
@@ -16,26 +18,18 @@
         .navbar-annor {
             background-color: var(--annor-blue) !important;
             border-bottom: 3px solid var(--annor-gold);
+            padding: 10px 0;
         }
         .nav-link {
             color: white !important;
             font-weight: 500;
             transition: 0.3s;
+            padding: 10px 15px !important;
         }
         .nav-link:hover {
             color: var(--annor-gold) !important;
         }
-        .btn-admin {
-            background-color: var(--annor-gold);
-            color: var(--annor-blue) !important;
-            font-weight: bold;
-            border: none;
-        }
-        .btn-admin:hover {
-            background-color: #b8962d;
-            transform: scale(1.05);
-        }
-        /* Style du Badge Panier avec animation */
+        /* Style du Badge Panier */
         .cart-badge-container {
             position: relative;
             display: inline-block;
@@ -52,6 +46,16 @@
             font-weight: bold;
             box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
         }
+        /* Amélioration du menu sur mobile */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: var(--annor-blue);
+                padding: 15px;
+                border-radius: 10px;
+                margin-top: 10px;
+                border: 1px solid var(--annor-gold);
+            }
+        }
     </style>
 </head>
 <body>
@@ -59,11 +63,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-annor sticky-top shadow">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="index.php">
-            <img src="images/logo.jpg" alt="Logo Annor" width="50" height="50" class="me-2 shadow-sm" style="border-radius: 50%; border: 1px solid var(--annor-gold);">
+            <img src="images/logo.jpg" alt="Logo Annor" width="45" height="45" class="me-2 shadow-sm" style="border-radius: 50%; border: 1px solid var(--annor-gold);">
             <span style="letter-spacing: 1px; font-weight: bold; color: var(--annor-gold);">ANNOR <span style="color: white;">BOUTIQUE</span></span>
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -78,20 +82,18 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php#categories"><i class="fas fa-th-large me-1"></i> Catégories</a>
+                    <a class="nav-link" href="contact.php"><i class="fas fa-envelope me-1"></i> Contact</a>
                 </li>
                 
                 <li class="nav-item mx-lg-3">
-                    <a class="nav-link cart-badge-container" href="#" data-bs-toggle="modal" data-bs-target="#modalPanier">
+                    <a class="nav-link cart-badge-container" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modalPanier">
                         <i class="fas fa-shopping-cart fs-5"></i>
                         <span id="panier-count" class="sync-panier-count">0</span>
                     </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.php"><i class="fas fa-envelope me-1"></i> Contact</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
