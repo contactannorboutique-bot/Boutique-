@@ -1,4 +1,6 @@
 <?php 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include_once('includes/db.php'); 
 include_once('includes/header.php'); 
 $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
