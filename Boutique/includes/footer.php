@@ -82,7 +82,9 @@
                 <h6 class="text-uppercase fw-bold mb-3 mb-md-4" style="color: #d4af37;">Contact</h6>
                 <div class="small">
                     <p class="mb-2">
-                        <i class="fas fa-map-marker-alt me-2" style="color: #d4af37;"></i> Cotonou, Bénin
+                        <a href="https://maps.app.goo.gl/7qTbANDkpb9JUNr46" class="footer-link text-white text-decoration-none" target="_blank">
+                            <i class="fas fa-map-marker-alt me-2 contact-icon" style="color: #d4af37;"></i> Cotonou, Bénin
+                        </a>
                     </p>
                     
                     <p class="mb-2">
@@ -116,4 +118,5 @@
             </div>
         </div>
     </div>
+
 </footer>
