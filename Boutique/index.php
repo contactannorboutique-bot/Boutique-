@@ -9,6 +9,8 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <style>
     :root {
         --annor-blue: #1a2a44;
@@ -22,7 +24,7 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         overflow-x: hidden;
     }
 
-    /* --- HERO SECTION --- */
+    /* --- HERO SECTION PRO --- */
     .hero-annor {
         position: relative;
         background: linear-gradient(rgba(26, 42, 68, 0.7), rgba(26, 42, 68, 0.7)),
@@ -36,52 +38,55 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    /* --- EFFET ZOOM IMAGE (Nouveau) --- */
-    .img-box {
-        height: 180px;
-        background: #fff;
+    .hero-content h1 {
+        font-size: 2.2rem;
+        letter-spacing: 3px;
+        font-weight: 800;
+        margin-bottom: 5px;
+        animation: fadeInUp 1s ease;
+    }
+
+    /* --- FILTRES : STICKY & PRO --- */
+    .filter-sticky {
+        position: sticky;
+        top: 0;
+        z-index: 1030;
+        background: rgba(244, 247, 246, 0.8);
+        backdrop-filter: blur(15px);
+        padding: 15px 0;
+    }
+
+    .filter-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .btn-filter {
+        background: white;
+        border: 1.5px solid #eee;
+        border-radius: 30px;
+        padding: 8px 18px;
+        color: #555;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: 0.3s all cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
         align-items: center;
-        justify-content: center;
-        position: relative;
-        padding: 15px;
-        overflow: hidden; /* Important pour que le zoom ne dépasse pas */
+        gap: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
-    .img-box img {
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: contain;
-        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Animation fluide */
-    }
-
-    /* Zoom au survol (PC) et quand on touche (Mobile) */
-    .product-card:hover .img-box img, 
-    .product-card:active .img-box img {
-        transform: scale(1.15);
-    }
-
-    /* --- BOUTONS --- */
-    .btn-add {
+    .btn-filter.active {
         background: var(--annor-blue);
         color: white;
-        border: none;
-        width: 100%;
-        padding: 12px;
-        border-radius: 12px;
-        font-weight: 700;
-        font-size: 0.8rem;
-        transition: 0.3s;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        border-color: var(--annor-blue);
+        transform: scale(1.05);
     }
 
-    .btn-add:hover {
-        background: var(--annor-gold);
-        transform: translateY(-2px);
-    }
-
-    /* --- GRILLE & CARDS --- */
+    /* --- GRILLE DE PRODUITS --- */
     .product-card {
         background: white;
         border-radius: 20px;
@@ -98,18 +103,70 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         transform: translateY(0);
     }
 
+    .img-box {
+        height: 180px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 15px;
+        overflow: hidden; /* Pour que l'image ne dépasse pas au zoom */
+    }
+
+    .img-box img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        transition: transform 0.5s ease; /* ANIMATION DE L'IMAGE */
+    }
+
+    /* EFFET ZOOM QUAND ON TOUCHE L'IMAGE */
+    .product-card:hover .img-box img, .product-card:active .img-box img {
+        transform: scale(1.2);
+    }
+
     .price-badge {
         position: absolute;
         top: 12px;
         left: 12px;
-        z-index: 10;
         background: var(--annor-blue);
         color: white;
         padding: 4px 12px;
         border-radius: 50px;
         font-weight: 700;
         font-size: 0.75rem;
+        z-index: 2;
     }
+
+    .btn-add {
+        background: var(--annor-blue);
+        color: white;
+        border: none;
+        width: 100%;
+        padding: 10px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.75rem;
+    }
+
+    /* NOUVEAU BOUTON ACHETER */
+    .btn-acheter {
+        background: var(--annor-gold);
+        color: white;
+        border: none;
+        width: 100%;
+        padding: 10px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        margin-top: 8px;
+        transition: 0.3s;
+    }
+    .btn-acheter:hover { color: white; opacity: 0.9; }
 
     /* Panier flottant */
     .cart-float {
@@ -127,7 +184,6 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         z-index: 1000;
         box-shadow: 0 10px 25px rgba(26, 42, 68, 0.4);
         border: 2px solid var(--annor-gold);
-        cursor: pointer;
     }
 
     .cart-count {
@@ -147,38 +203,7 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         border: 2px solid white;
     }
 
-    /* Filtres Sticky */
-    .filter-sticky {
-        position: sticky;
-        top: 0;
-        z-index: 1030;
-        background: rgba(244, 247, 246, 0.9);
-        backdrop-filter: blur(15px);
-        padding: 15px 0;
-    }
-
-    .filter-container {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .btn-filter {
-        background: white;
-        border: 1.5px solid #eee;
-        border-radius: 30px;
-        padding: 8px 18px;
-        color: #555;
-        font-weight: 600;
-        font-size: 0.85rem;
-        text-decoration: none;
-        transition: 0.3s;
-    }
-
-    .btn-filter.active {
-        background: var(--annor-blue);
-        color: white;
-    }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 
 <div class="cart-float" onclick="ouvrirPanier()">
@@ -188,7 +213,7 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
 
 <section class="hero-annor">
     <div class="hero-content text-center">
-        <h1 class="animate__animated animate__fadeInDown">ANNOR BOUTIQUE</h1>
+        <h1>ANNOR BOUTIQUE</h1>
         <div style="width: 80px; height: 4px; background: var(--annor-gold); margin: 0 auto 15px;"></div>
         <p class="text-uppercase small fw-bold" style="letter-spacing: 3px; color: rgba(255,255,255,0.8);">Luxury Heritage</p>
     </div>
@@ -196,13 +221,16 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
 
 <div class="filter-sticky">
     <div class="filter-container">
-        <a href="accueil?cat=tous" class="btn-filter <?php echo $categorie_actuelle == 'tous' ? 'active' : ''; ?>">Tous</a>
-        <a href="accueil?cat=bijoux" class="btn-filter <?php echo $categorie_actuelle == 'bijoux' ? 'active' : ''; ?>">Bijoux</a>
-        <a href="accueil?cat=chapeau_adulte" class="btn-filter <?php echo $categorie_actuelle == 'chapeau_adulte' ? 'active' : ''; ?>">Chapeaux</a>
+        <a href="index.php?cat=tous" class="btn-filter <?php echo $categorie_actuelle == 'tous' ? 'active' : ''; ?>">
+            <i class="fas fa-th-large"></i> Tous
+        </a>
+        <a href="index.php?cat=bijoux" class="btn-filter <?php echo $categorie_actuelle == 'bijoux' ? 'active' : ''; ?>">
+            <i class="fas fa-gem"></i> Bijoux
+        </a>
     </div>
 </div>
 
-<div class="container mt-4">
+<div class="container mt-2">
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 mb-5">
         <?php
         $cat_safe = mysqli_real_escape_string($conn, $categorie_actuelle);
@@ -221,10 +249,9 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
                         </div>
                         <div class="p-3 text-center">
                             <h6 class="text-truncate mb-3 fw-bold" style="color: #333; font-size: 0.85rem;"><?php echo htmlspecialchars($row['nom']); ?></h6>
+                            <button onclick="ajouterAuPanier('<?php echo addslashes($row['nom']); ?>', <?php echo $row['prix']; ?>, '<?php echo $row['image']; ?>')" class="btn-add"><i class="fas fa-plus me-1"></i> PANIER</button>
                             
-                            <button onclick="ajouterAuPanier('<?php echo addslashes($row['nom']); ?>', <?php echo $row['prix']; ?>, '<?php echo $row['image']; ?>')" class="btn-add">
-                                <i class="fas fa-shopping-cart me-2"></i> ACHETER
-                            </button>
+                            <a href="commander.php" class="btn-acheter"><i class="fas fa-shopping-cart me-1"></i> ACHETEZ</a>
                         </div>
                     </div>
                 </div>
@@ -235,9 +262,9 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
 
 <div class="modal fade" id="modalPanier" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0" style="border-radius: 25px;">
+        <div class="modal-content border-0" style="border-radius: 25px; overflow: hidden;">
             <div class="modal-header bg-dark text-white border-0 py-4">
-                <h5 class="modal-title fw-bold">VOTRE PANIER</h5>
+                <h5 class="modal-title fw-bold"><i class="fas fa-shopping-cart me-2"></i> VOTRE PANIER</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-4" id="zone-panier"></div>
@@ -246,7 +273,8 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
                     <span class="h5 fw-bold">TOTAL :</span>
                     <span class="h5 fw-bold text-primary" id="total-panier">0 F</span>
                 </div>
-                <a href="commander" class="btn btn-primary w-100 py-3 fw-bold rounded-pill">COMMANDER MAINTENANT</a>
+                <button onclick="viderPanier()" class="btn btn-sm text-danger mb-3 p-0 border-0 bg-transparent fw-bold"><i class="fas fa-trash me-1"></i> Vider le panier</button>
+                <a href="commander.php" class="btn btn-primary w-100 py-3 fw-bold rounded-pill shadow-lg">VALIDER LA COMMANDE</a>
             </div>
         </div>
     </div>
@@ -278,7 +306,7 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         const div = document.getElementById('zone-panier');
         const btnZone = document.getElementById('zone-bouton-commande');
         if (cart.length === 0) {
-            div.innerHTML = "<div class='text-center py-5'><p>Votre panier est vide</p></div>";
+            div.innerHTML = "<div class='text-center py-5'><i class='fas fa-shopping-bag fa-4x mb-3 opacity-20'></i><p class='fw-bold'>Votre panier est vide</p></div>";
             btnZone.style.display = "none";
             return;
         }
@@ -287,18 +315,19 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         let html = "";
         cart.forEach((item, i) => {
             total += (item.prix * item.qte);
-            html += `<div class='d-flex align-items-center mb-3 border-bottom pb-2'>
-                        <img src='uploads/${item.img}' width='50' height='50' style='border-radius:10px;' class='me-2'>
-                        <div class='flex-grow-1'>
-                            <div class='small fw-bold'>${item.nom}</div>
-                            <div class='small text-primary'>${item.prix.toLocaleString()} F</div>
-                        </div>
-                        <div class='d-flex align-items-center'>
-                            <button onclick='changeQte(${i},-1)' class='btn btn-sm'>-</button>
-                            <span class='fw-bold'>${item.qte}</span>
-                            <button onclick='changeQte(${i},1)' class='btn btn-sm'>+</button>
-                        </div>
-                    </div>`;
+            html += `
+        <div class='d-flex align-items-center mb-4 pb-3 border-bottom animate__animated animate__fadeInUp'>
+            <img src='uploads/${item.img}' width='60' height='60' style='object-fit:cover; border-radius:12px;' class='me-3 shadow-sm'>
+            <div class='flex-grow-1'>
+                <div class='fw-bold' style='font-size:0.9rem;'>${item.nom}</div>
+                <div class='text-primary fw-bold small'>${item.prix.toLocaleString()} F</div>
+            </div>
+            <div class='d-flex align-items-center bg-light rounded-pill px-2'>
+                <button onclick='changeQte(${i},-1)' class='btn btn-sm border-0'>-</button>
+                <span class='px-2 fw-bold'>${item.qte}</span>
+                <button onclick='changeQte(${i},1)' class='btn btn-sm border-0'>+</button>
+            </div>
+        </div>`;
         });
         document.getElementById('total-panier').innerText = total.toLocaleString() + " F";
         div.innerHTML = html;
@@ -310,18 +339,38 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         sauvegarder();
     }
 
+    function viderPanier() {
+        Swal.fire({
+            title: 'Vider le panier ?',
+            text: "Tous vos articles seront retirés.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1a2a44',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, vider',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                cart = [];
+                sauvegarder();
+            }
+        });
+    }
+
     function notifier(nom) {
-        const n = document.createElement('div');
-        n.style = "position:fixed; bottom:110px; left:50%; transform:translateX(-50%); background:var(--annor-blue); color:white; padding:12px 25px; border-radius:50px; z-index:9999; font-weight:600; box-shadow:0 10px 30px rgba(0,0,0,0.2); animation: fadeInUp 0.4s ease;";
-        n.innerHTML = `<i class='fas fa-check me-2'></i> ${nom} ajouté !`;
+        let n = document.createElement('div');
+        n.innerHTML = `<i class='fas fa-check-circle me-2'></i> ${nom} ajouté !`;
+        n.style = "position:fixed; bottom:110px; left:50%; transform:translateX(-50%); background:rgba(26,42,68,0.95); color:white; padding:12px 25px; border-radius:50px; z-index:9999; font-size:0.85rem; font-weight:600; box-shadow:0 10px 30px rgba(0,0,0,0.2); animation: fadeInUp 0.4s ease;";
         document.body.appendChild(n);
         setTimeout(() => { n.remove(); }, 2000);
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
         sauvegarder();
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('show'); });
+            entries.forEach((e) => {
+                if (e.isIntersecting) e.target.classList.add('show');
+            });
         }, { threshold: 0.1 });
         document.querySelectorAll('.product-card').forEach(c => observer.observe(c));
     });
