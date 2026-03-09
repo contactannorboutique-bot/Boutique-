@@ -100,7 +100,7 @@
     <div class="about-container">
         <div class="row g-0">
             <div class="col-md-6">
-                <img src="images/boutique-annor.jpg" alt="Intérieur de Annor Boutique" class="shop-image">
+                <img src="images/bouique.JPG" alt="Intérieur de Annor Boutique" class="shop-image">
             </div>
             
             <div class="col-md-6 p-4 p-lg-5">
