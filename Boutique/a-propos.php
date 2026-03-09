@@ -138,7 +138,7 @@
         <div class="col-lg-8 mx-auto">
             <div class="map-frame shadow-lg">
                 <iframe 
-                    src="http://googleusercontent.com/maps.google.com/7" 
+                    src="https://maps.app.goo.gl/7qTbANDkpb9JUNr46" 
                     width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy">
                 </iframe>
             </div>
@@ -181,5 +181,6 @@ function startProgressiveCounters() {
 
 document.addEventListener('DOMContentLoaded', startProgressiveCounters);
 </script>
+
 
 <?php include_once('includes/footer.php'); ?>
