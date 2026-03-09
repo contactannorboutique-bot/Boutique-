@@ -91,7 +91,7 @@ if(isset($_GET['suppr'])) {
     <div class="container">
         <a class="navbar-brand sidebar-brand" href="#"><i class="fas fa-gem me-2"></i>ANNOR<span class="text-dark">PRO</span></a>
         <div class="ms-auto d-flex align-items-center">
-            <a href="../index.php" class="btn btn-outline-secondary btn-sm me-3 border-0"><i class="fas fa-external-link-alt me-1"></i> Boutique</a>
+            <a href="../index.php" target="_blank" class="btn btn-outline-secondary btn-sm me-3 border-0"><i class="fas fa-external-link-alt me-1"></i> Boutique</a>
             <a href="logout.php" class="btn btn-danger btn-sm px-3 shadow-sm rounded-pill">Quitter</a>
         </div>
     </div>
@@ -259,4 +259,5 @@ if(isset($_GET['suppr'])) {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
