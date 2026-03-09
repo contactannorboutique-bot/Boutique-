@@ -86,6 +86,27 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         transform: scale(1.05);
     }
 
+    .dropdown-menu-annor {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        min-width: 200px;
+        margin-top: 10px !important;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    .dropdown-item {
+        border-radius: 12px;
+        padding: 12px 15px;
+        font-weight: 500;
+        color: var(--annor-blue);
+        transition: 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
     /* --- GRILLE DE PRODUITS --- */
     .product-card {
         background: white;
@@ -111,17 +132,17 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         justify-content: center;
         position: relative;
         padding: 15px;
-        overflow: hidden; /* Pour que l'image ne dépasse pas au zoom */
+        overflow: hidden;
     }
 
     .img-box img {
         max-height: 100%;
         max-width: 100%;
         object-fit: contain;
-        transition: transform 0.5s ease; /* ANIMATION DE L'IMAGE */
+        transition: transform 0.5s ease; /* ANIMATION AJOUTÉE */
     }
 
-    /* EFFET ZOOM QUAND ON TOUCHE L'IMAGE */
+    /* EFFET ZOOM DEMANDÉ */
     .product-card:hover .img-box img, .product-card:active .img-box img {
         transform: scale(1.2);
     }
@@ -136,7 +157,7 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         border-radius: 50px;
         font-weight: 700;
         font-size: 0.75rem;
-        z-index: 2;
+        z-index: 5;
     }
 
     .btn-add {
@@ -150,9 +171,9 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         font-size: 0.75rem;
     }
 
-    /* NOUVEAU BOUTON ACHETER */
-    .btn-acheter {
-        background: var(--annor-gold);
+    /* BOUTON WHATSAPP RENOMMÉ EN ACHETEZ */
+    .btn-wa {
+        background: #25D366;
         color: white;
         border: none;
         width: 100%;
@@ -164,9 +185,7 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         text-align: center;
         text-decoration: none;
         margin-top: 8px;
-        transition: 0.3s;
     }
-    .btn-acheter:hover { color: white; opacity: 0.9; }
 
     /* Panier flottant */
     .cart-float {
@@ -204,6 +223,7 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
     }
 
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 
 <div class="cart-float" onclick="ouvrirPanier()">
@@ -224,6 +244,18 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         <a href="index.php?cat=tous" class="btn-filter <?php echo $categorie_actuelle == 'tous' ? 'active' : ''; ?>">
             <i class="fas fa-th-large"></i> Tous
         </a>
+
+        <div class="dropdown">
+            <button class="btn-filter dropdown-toggle <?php echo (strpos($categorie_actuelle, 'chapeau') !== false) ? 'active' : ''; ?>"
+                type="button" id="dropChapeaux" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-hat-cowboy"></i> Chapeaux
+            </button>
+            <ul class="dropdown-menu dropdown-menu-annor" aria-labelledby="dropChapeaux">
+                <li><a class="dropdown-item" href="index.php?cat=chapeau_adulte"><i class="fas fa-user-tie"></i> Modèles Adultes</a></li>
+                <li><a class="dropdown-item" href="index.php?cat=chapeau_enfant"><i class="fas fa-child"></i> Modèles Enfants</a></li>
+            </ul>
+        </div>
+
         <a href="index.php?cat=bijoux" class="btn-filter <?php echo $categorie_actuelle == 'bijoux' ? 'active' : ''; ?>">
             <i class="fas fa-gem"></i> Bijoux
         </a>
@@ -251,7 +283,7 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
                             <h6 class="text-truncate mb-3 fw-bold" style="color: #333; font-size: 0.85rem;"><?php echo htmlspecialchars($row['nom']); ?></h6>
                             <button onclick="ajouterAuPanier('<?php echo addslashes($row['nom']); ?>', <?php echo $row['prix']; ?>, '<?php echo $row['image']; ?>')" class="btn-add"><i class="fas fa-plus me-1"></i> PANIER</button>
                             
-                            <a href="commander.php" class="btn-acheter"><i class="fas fa-shopping-cart me-1"></i> ACHETEZ</a>
+                            <a href="https://wa.me/2290197609813?text=<?php echo urlencode("Bonjour ANNOR BOUTIQUE, je souhaite commander : " . $row['nom']); ?>" class="btn-wa" target="_blank"><i class="fas fa-shopping-cart me-1"></i> ACHETEZ</a>
                         </div>
                     </div>
                 </div>
@@ -315,19 +347,18 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
         let html = "";
         cart.forEach((item, i) => {
             total += (item.prix * item.qte);
-            html += `
-        <div class='d-flex align-items-center mb-4 pb-3 border-bottom animate__animated animate__fadeInUp'>
-            <img src='uploads/${item.img}' width='60' height='60' style='object-fit:cover; border-radius:12px;' class='me-3 shadow-sm'>
-            <div class='flex-grow-1'>
-                <div class='fw-bold' style='font-size:0.9rem;'>${item.nom}</div>
-                <div class='text-primary fw-bold small'>${item.prix.toLocaleString()} F</div>
-            </div>
-            <div class='d-flex align-items-center bg-light rounded-pill px-2'>
-                <button onclick='changeQte(${i},-1)' class='btn btn-sm border-0'>-</button>
-                <span class='px-2 fw-bold'>${item.qte}</span>
-                <button onclick='changeQte(${i},1)' class='btn btn-sm border-0'>+</button>
-            </div>
-        </div>`;
+            html += `<div class='d-flex align-items-center mb-4 pb-3 border-bottom animate__animated animate__fadeInUp'>
+                <img src='uploads/${item.img}' width='60' height='60' style='object-fit:cover; border-radius:12px;' class='me-3 shadow-sm'>
+                <div class='flex-grow-1'>
+                    <div class='fw-bold' style='font-size:0.9rem;'>${item.nom}</div>
+                    <div class='text-primary fw-bold small'>${item.prix.toLocaleString()} F</div>
+                </div>
+                <div class='d-flex align-items-center bg-light rounded-pill px-2'>
+                    <button onclick='changeQte(${i},-1)' class='btn btn-sm border-0'>-</button>
+                    <span class='px-2 fw-bold'>${item.qte}</span>
+                    <button onclick='changeQte(${i},1)' class='btn btn-sm border-0'>+</button>
+                </div>
+            </div>`;
         });
         document.getElementById('total-panier').innerText = total.toLocaleString() + " F";
         div.innerHTML = html;
@@ -348,7 +379,8 @@ $categorie_actuelle = isset($_GET['cat']) ? $_GET['cat'] : 'tous';
             confirmButtonColor: '#1a2a44',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Oui, vider',
-            cancelButtonText: 'Annuler'
+            cancelButtonText: 'Annuler',
+            reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
                 cart = [];
