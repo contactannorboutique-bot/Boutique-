@@ -62,7 +62,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-annor sticky-top shadow">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="index">
+        <a class="navbar-brand d-flex align-items-center" href="accueil">
             <img src="images/logo.jpg" alt="Logo Annor" width="45" height="45" class="me-2 shadow-sm" style="border-radius: 50%; border: 1px solid var(--annor-gold);">
             <span style="letter-spacing: 1px; font-weight: bold; color: var(--annor-gold);">ANNOR <span style="color: white;">BOUTIQUE</span></span>
         </a>
@@ -74,7 +74,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="index"><i class="fas fa-home me-1"></i> Accueil</a>
+                    <a class="nav-link" href="accueil"><i class="fas fa-home me-1"></i> Accueil</a>
                 </li>
                 
                 <li class="nav-item">
