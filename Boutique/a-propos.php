@@ -137,8 +137,8 @@
         </div>
         <div class="col-lg-8 mx-auto">
             <div class="map-frame shadow-lg">
-               <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126588.16361730421!2d2.3421884!3d6.3702928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1023a141566373b3%3A0x6b43ea8338e5ec26!2sCotonou%2C%20B%C3%A9nin!5e0!3m2!1sfr!2sbj!4v1700000000000!5m2!1sfr!2sbj" 
+              <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.111!2d2.41!3d6.37!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1023559999999999%3A0x9999999999999999!2sAnnor%20Boutique!5e0!3m2!1sfr!2sbj!4v1710000000000!5m2!1sfr!2sbj" 
     width="100%" 
     height="350" 
     style="border:0;" 
@@ -189,4 +189,5 @@ document.addEventListener('DOMContentLoaded', startProgressiveCounters);
 
 
 <?php include_once('includes/footer.php'); ?>
+
 
